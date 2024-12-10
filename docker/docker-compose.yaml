@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  postgresdb:
+    image: postgres:latest
+    container_name: postgresdb
+    env_file:
+      - .env
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      start_period: 5s
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    restart: always

@@ -1,0 +1,23 @@
+server:
+  port: ${PORT:8081}
+spring:
+  datasource:
+    url: ${JDBC_URL:jdbc:postgresql://localhost:5433/TESTSPRIBEDB}
+    username: ${USER_NAME:admin}
+    password: ${PASSWORD:admin}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+    default-schema: public
+    enabled: true
+fixer:
+  baseUrl: ${FIXER_URL:https://data.fixer.io/api}
+  accessKey: ${FIXER_KEY:VALID_KEY}
